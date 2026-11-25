@@ -87,26 +87,14 @@ export default function Header() {
             Solicitar orçamento
           </a>
 
-          <div className="header-mobile-actions">
-            <a
-              className="header-cta-mobile"
-              href={whatsappLink(wa.geral)}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Solicitar orçamento pelo WhatsApp"
-            >
-              <MessageCircle />
-            </a>
-
-            <button
-              className="burger"
-              onClick={() => setOpen(true)}
-              aria-label="Abrir menu"
-              aria-expanded={open}
-            >
-              <Menu />
-            </button>
-          </div>
+          <button
+            className="burger"
+            onClick={() => setOpen(true)}
+            aria-label="Abrir menu"
+            aria-expanded={open}
+          >
+            <Menu />
+          </button>
         </div>
       </header>
 
