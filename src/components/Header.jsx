@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Menu, MessageCircle, X } from 'lucide-react'
 import logo from '../assets/images/logo-ag.png'
 import { wa, whatsappLink } from '../utils/whatsapp.js'
@@ -15,13 +15,25 @@ const LINKS = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [active, setActive] = useState('inicio')
   const [open, setOpen] = useState(false)
+  const lastY = useRef(0)
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 24)
-      const pos = window.scrollY + 140
+      const y = window.scrollY
+      setScrolled(y > 24)
+
+      // Esconde ao descer, revela ao subir (evita sobrepor o rodapé no fim da página)
+      if (y > lastY.current && y > 200 && !open) {
+        setHidden(true)
+      } else if (y < lastY.current || y <= 200) {
+        setHidden(false)
+      }
+      lastY.current = y
+
+      const pos = y + 140
       let current = 'inicio'
       LINKS.forEach((l) => {
         const el = document.getElementById(l.id)
@@ -32,7 +44,7 @@ export default function Header() {
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [open])
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -45,7 +57,7 @@ export default function Header() {
 
   return (
     <>
-      <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+      <header className={`header ${scrolled ? 'scrolled' : ''} ${hidden && !open ? 'hide' : ''}`}>
         <div className="container header-inner">
           <a href="#inicio" className="brand" onClick={closeMenu}>
             <img src={logo} alt="Logótipo AG Publicidade" />
@@ -75,14 +87,26 @@ export default function Header() {
             Solicitar orçamento
           </a>
 
-          <button
-            className="burger"
-            onClick={() => setOpen(true)}
-            aria-label="Abrir menu"
-            aria-expanded={open}
-          >
-            <Menu />
-          </button>
+          <div className="header-mobile-actions">
+            <a
+              className="header-cta-mobile"
+              href={whatsappLink(wa.geral)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Solicitar orçamento pelo WhatsApp"
+            >
+              <MessageCircle />
+            </a>
+
+            <button
+              className="burger"
+              onClick={() => setOpen(true)}
+              aria-label="Abrir menu"
+              aria-expanded={open}
+            >
+              <Menu />
+            </button>
+          </div>
         </div>
       </header>
 
