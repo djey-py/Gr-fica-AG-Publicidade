@@ -1,0 +1,129 @@
+/* ============ Lightbox ============ */
+
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(4, 20, 34, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: lbFade 0.25s ease both;
+}
+
+@keyframes lbFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lb-figure {
+  max-width: min(920px, 94vw);
+}
+
+.lb-figure img {
+  max-width: 100%;
+  max-height: 76vh;
+  margin-inline: auto;
+  border-radius: 16px;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.5);
+}
+
+.lb-cap {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.lb-cap h3 {
+  margin-top: 5px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--white);
+}
+
+.lb-btn {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.lb-btn:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: scale(1.06);
+}
+
+.lb-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.lb-close {
+  top: 22px;
+  right: 22px;
+}
+
+.lb-count {
+  position: absolute;
+  top: 34px;
+  left: 28px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.lb-prev {
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lb-prev:hover {
+  transform: translateY(-50%) scale(1.06);
+}
+
+.lb-next {
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lb-next:hover {
+  transform: translateY(-50%) scale(1.06);
+}
+
+@media (max-width: 640px) {
+  .lb-prev,
+  .lb-next {
+    top: auto;
+    bottom: 26px;
+    transform: none;
+  }
+
+  .lb-prev:hover,
+  .lb-next:hover {
+    transform: scale(1.06);
+  }
+
+  .lb-prev {
+    left: calc(50% - 60px);
+  }
+
+  .lb-next {
+    right: calc(50% - 60px);
+  }
+}
