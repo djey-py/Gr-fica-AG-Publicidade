@@ -1,0 +1,91 @@
+/* ============ Botão flutuante de WhatsApp ============ */
+
+.wa-float {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+}
+
+.wa-btn {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+  box-shadow: 0 14px 34px rgba(37, 211, 102, 0.45);
+  transition: transform 0.3s ease;
+}
+
+.wa-btn:hover {
+  transform: scale(1.08);
+}
+
+.wa-btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+.wa-btn::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 211, 102, 0.5);
+  animation: waPulse 2s ease-out infinite;
+}
+
+@keyframes waPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+.wa-tip {
+  position: absolute;
+  right: 72px;
+  white-space: nowrap;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.wa-float:hover .wa-tip {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 640px) {
+  .wa-float {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .wa-btn {
+    width: 56px;
+    height: 56px;
+  }
+
+  .wa-tip {
+    display: none;
+  }
+}
