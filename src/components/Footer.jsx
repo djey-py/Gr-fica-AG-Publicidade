@@ -1,7 +1,8 @@
-import { ArrowUp, Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
-import logo from '../assets/images/logo-ag.png'
-import { wa, whatsappLink } from '../utils/whatsapp.js'
-import '../styles/footer.css'
+import { MessageCircle, Phone, MapPin } from 'lucide-react'
+import Logo from './Logo.jsx'
+import { services } from '../data/services.js'
+import { getWhatsAppLink, wa, PHONE_DISPLAY, PHONE_ALT_DISPLAY } from '../utils/whatsapp.js'
+import './../styles/footer.css'
 
 const NAV = [
   { id: 'inicio', label: 'Início' },
@@ -12,82 +13,90 @@ const NAV = [
   { id: 'contactos', label: 'Contactos' },
 ]
 
-const SERVICES = [
-  'Comunicação Visual',
-  'Placas e Sinalização',
-  'Impressão Digital',
-  'Personalização',
-  'Material Gráfico',
-]
+const ADDRESS = 'Kilamba Kiaxi, Palanca, Rua L — junto à loja da Stara, Luanda'
 
 export default function Footer() {
+  const go = (id) => (e) => {
+    e.preventDefault()
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+  const year = new Date().getFullYear()
+
   return (
     <footer className="footer">
-      <div className="container">
-        <div className="footer-grid">
-          <div className="f-brand">
-            <img src={logo} alt="Logótipo AG Publicidade" loading="lazy" />
-            <p>
-              Gráfica e empresa de comunicação visual em Luanda. Criamos, fabricamos,
-              imprimimos e montamos soluções publicitárias que dão vida à sua marca.
-            </p>
-            <span className="f-slogan">AG Publicidade — Qualidade e rapidez moram aqui.</span>
-            <div className="f-social">
-              <span className="f-soc" title="Facebook: Gráfica AG Publicidade"><Facebook /></span>
-              <span className="f-soc" title="Instagram: Gráfica AG Publicidade"><Instagram /></span>
-            </div>
-          </div>
-
-          <div className="f-col">
-            <h4>Navegação</h4>
-            <ul>
-              {NAV.map((l) => (
-                <li key={l.id}><a href={`#${l.id}`}>{l.label}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="f-col">
-            <h4>Serviços</h4>
-            <ul>
-              {SERVICES.map((s) => (
-                <li key={s}><a href="#servicos">{s}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="f-col">
-            <h4>Contactos</h4>
-            <ul className="f-contact">
-              <li>
-                <MessageCircle />
-                <a href={whatsappLink(wa.geral)} target="_blank" rel="noopener noreferrer">
-                  WhatsApp: 956 967 295
-                </a>
-              </li>
-              <li>
-                <Phone />
-                <a href="tel:+244931354068">Tel: 931 354 068</a>
-              </li>
-              <li>
-                <Mail />
-                <a href="mailto:graficaagpublicidade@gmail.com">graficaagpublicidade@gmail.com</a>
-              </li>
-              <li>
-                <MapPin />
-                <span>Luanda · Kilamba, Bairro Vila Flor</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} AG Publicidade. Todos os direitos reservados.</span>
-          <a className="to-top" href="#inicio">
-            Voltar ao topo
-            <ArrowUp />
+      <div className="footer-inner">
+        <div className="footer-brand">
+          <Logo variant="light" height={40} />
+          <p className="footer-slogan">MAIS FÁCIL — A sua ideia, a nossa criatividade!</p>
+          <a
+            className="btn btn-orange footer-wa"
+            href={getWhatsAppLink(wa.geral)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <MessageCircle size={18} /> Pedir orçamento
           </a>
         </div>
+
+        <div className="footer-col">
+          <h4>Navegação</h4>
+          <ul>
+            {NAV.map((n) => (
+              <li key={n.id}>
+                <a href={`#${n.id}`} onClick={go(n.id)}>
+                  {n.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="footer-col">
+          <h4>Serviços</h4>
+          <ul>
+            {services.map((s) => (
+              <li key={s.id}>
+                <a
+                  href="#servicos"
+                  onClick={go('servicos')}
+                >
+                  {s.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="footer-col footer-contact">
+          <h4>Contactos</h4>
+          <ul>
+            <li>
+              <a href={getWhatsAppLink(wa.geral)} target="_blank" rel="noopener noreferrer">
+                <MessageCircle size={16} /> {PHONE_DISPLAY}
+              </a>
+            </li>
+            <li>
+              <a href={`tel:+244${PHONE_DISPLAY.replace(/\s/g, '')}`}>
+                <Phone size={16} /> {PHONE_DISPLAY}
+              </a>
+            </li>
+            <li>
+              <span className="footer-muted">
+                <Phone size={16} /> {PHONE_ALT_DISPLAY}
+              </span>
+            </li>
+            <li>
+              <span className="footer-muted">
+                <MapPin size={16} /> {ADDRESS}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <span>© {year} MAIS FÁCIL — Serviços Gráficos. Todos os direitos reservados.</span>
+        <span className="footer-bottom-tag">Transformamos a sua ideia em uma realidade!</span>
       </div>
     </footer>
   )

@@ -1,123 +1,78 @@
-import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
-import qrWhatsapp from '../assets/images/qr-whatsapp.png'
-import { wa, whatsappLink } from '../utils/whatsapp.js'
+import { MessageCircle, Phone, MapPin, ArrowRight } from 'lucide-react'
+import { getWhatsAppLink, wa, PHONE_DISPLAY, PHONE_ALT_DISPLAY } from '../utils/whatsapp.js'
 import SectionHeading from './SectionHeading.jsx'
-import '../styles/contact.css'
+import './../styles/contact.css'
 
-const MAP_SRC =
-  'https://maps.google.com/maps?q=Kilamba%20Vila%20Flor%2C%20Luanda%2C%20Angola&t=&z=13&ie=UTF8&iwloc=&output=embed'
+const ADDRESS = 'Município do Kilamba Kiaxi, Distrito Urbano do Palanca, Rua L, junto à loja da Stara.'
 
 export default function Contact() {
   return (
-    <section className="section contact" id="contactos">
-      <div className="container">
-        <SectionHeading
-          center
-          kicker="Contactos"
-          title="VAMOS DAR VIDA À SUA IDEIA?"
-          desc="Fale directamente com a nossa equipa e receba o orçamento do seu projecto."
-        />
+    <section id="contactos" className="contact" aria-labelledby="contactos-title">
+      <SectionHeading
+        eyebrow="Contactos"
+        title="VAMOS CRIAR ALGO JUNTOS?"
+        subtitle="Fale com a MAIS FÁCIL e transforme a sua ideia num projecto real. Atendemos pelo WhatsApp e por telefone."
+      />
 
-        <div className="contact-grid">
-          <div className="c-cards">
-            <article className="c-card reveal">
-              <span className="c-ico green"><MessageCircle /></span>
-              <span>
-                <span className="c-label">WhatsApp</span>
-                <span className="c-value">956 967 295</span>
-              </span>
-              <a
-                className="btn-mini green"
-                href={whatsappLink(wa.geral)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Abrir WhatsApp
-              </a>
-            </article>
+      <div className="contact-grid">
+        <a
+          className="contact-card reveal"
+          href={getWhatsAppLink(wa.geral)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="contact-icon contact-icon--wa">
+            <MessageCircle size={26} strokeWidth={2} />
+          </span>
+          <h3>WhatsApp</h3>
+          <p>{PHONE_DISPLAY}</p>
+          <span className="contact-link">
+            Iniciar conversa <ArrowRight size={16} />
+          </span>
+        </a>
 
-            <article className="c-card reveal" data-delay="1">
-              <span className="c-ico"><Phone /></span>
-              <span>
-                <span className="c-label">Telefone alternativo</span>
-                <span className="c-value">931 354 068</span>
-              </span>
-              <a className="btn-mini" href="tel:+244931354068">Ligar agora</a>
-            </article>
+        <a className="contact-card reveal" href={`tel:+244${PHONE_DISPLAY.replace(/\s/g, '')}`}>
+          <span className="contact-icon contact-icon--phone">
+            <Phone size={26} strokeWidth={2} />
+          </span>
+          <h3>Telefone</h3>
+          <p>{PHONE_DISPLAY}</p>
+          <p className="contact-alt">Alt: {PHONE_ALT_DISPLAY}</p>
+          <span className="contact-link">
+            Ligar diretamente <ArrowRight size={16} />
+          </span>
+        </a>
 
-            <article className="c-card reveal" data-delay="2">
-              <span className="c-ico"><Mail /></span>
-              <span>
-                <span className="c-label">Email</span>
-                <span className="c-value">graficaagpublicidade@gmail.com</span>
-              </span>
-              <a className="btn-mini" href="mailto:graficaagpublicidade@gmail.com">Enviar email</a>
-            </article>
-
-            <article className="c-card reveal" data-delay="3">
-              <span className="c-ico"><MapPin /></span>
-              <span>
-                <span className="c-label">Localização</span>
-                <span className="c-value">Luanda · Kilamba, Bairro Vila Flor</span>
-              </span>
-              <a
-                className="btn-mini"
-                href="https://www.google.com/maps/search/?api=1&query=Kilamba+Vila+Flor+Luanda"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ver no mapa
-              </a>
-            </article>
-          </div>
-
-          <div className="contact-side">
-            <div className="qr-card reveal" data-delay="1">
-              <h3>Fale connosco agora</h3>
-              <p>Aponte a câmara do seu telefone para o código e abra a conversa no WhatsApp.</p>
-              <img
-                className="qr"
-                src={qrWhatsapp}
-                alt="Código QR para o WhatsApp da AG Publicidade"
-                loading="lazy"
-              />
-              <a
-                className="qr-link"
-                href={whatsappLink(wa.geral)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                wa.me/244956967295
-              </a>
-            </div>
-
-            <div className="social-row reveal" data-delay="2">
-              <div className="social-chip">
-                <span className="si fb"><Facebook /></span>
-                <span>
-                  <strong>Facebook</strong>
-                  <small>Encontre-nos: Gráfica AG Publicidade</small>
-                </span>
-              </div>
-              <div className="social-chip">
-                <span className="si ig"><Instagram /></span>
-                <span>
-                  <strong>Instagram</strong>
-                  <small>Encontre-nos: Gráfica AG Publicidade</small>
-                </span>
-              </div>
-            </div>
-          </div>
+        <div className="contact-card reveal">
+          <span className="contact-icon contact-icon--pin">
+            <MapPin size={26} strokeWidth={2} />
+          </span>
+          <h3>Localização</h3>
+          <p className="contact-address">{ADDRESS}</p>
         </div>
+      </div>
 
-        <div className="map-wrap reveal" data-delay="1">
-          <iframe
-            title="Localização da AG Publicidade — Kilamba, Luanda"
-            src={MAP_SRC}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
+      {/* Representação visual da localização (sem coordenadas inventadas). */}
+      <div className="contact-map reveal" role="img" aria-label={`Localização: ${ADDRESS}`}>
+        <svg viewBox="0 0 800 320" className="map-svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="800" height="320" fill="#09165B" />
+          <g stroke="#1B2A7A" strokeWidth="14" opacity="0.9">
+            <line x1="0" y1="90" x2="800" y2="70" />
+            <line x1="0" y1="210" x2="800" y2="240" />
+            <line x1="160" y1="0" x2="190" y2="320" />
+            <line x1="520" y1="0" x2="560" y2="320" />
+          </g>
+          <g stroke="#FF6500" strokeWidth="4" opacity="0.5" strokeDasharray="2 14">
+            <line x1="0" y1="150" x2="800" y2="150" />
+            <line x1="350" y1="0" x2="350" y2="320" />
+          </g>
+          <circle cx="400" cy="160" r="46" fill="#FF6500" opacity="0.18" />
+          <circle cx="400" cy="160" r="22" fill="#FF6500" />
+          <path d="M400 182 L400 205" stroke="#FF6500" strokeWidth="6" strokeLinecap="round" />
+        </svg>
+        <div className="map-label">
+          <MapPin size={18} />
+          <span>{ADDRESS}</span>
         </div>
       </div>
     </section>

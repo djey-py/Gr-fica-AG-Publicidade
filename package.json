@@ -1,9 +1,9 @@
 {
-  "name": "ag-publicidade",
+  "name": "mais-facil-servicos-graficos",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "AG Publicidade — Gráfica, Impressão e Comunicação Visual em Luanda",
+  "description": "MAIS FÁCIL — Serviços Gráficos: website comercial premium (React + Vite) para gráfica em Luanda",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

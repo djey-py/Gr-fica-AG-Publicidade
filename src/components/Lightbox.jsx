@@ -1,62 +1,33 @@
 import { useEffect } from 'react'
-import { ChevronLeft, ChevronRight, X } from 'lucide-react'
-import '../styles/lightbox.css'
+import { X } from 'lucide-react'
+import './../styles/lightbox.css'
 
-export default function Lightbox({ items, index, onClose, onNav }) {
-  const item = items[index]
-
+export default function Lightbox({ item, onClose }) {
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === 'Escape') onClose()
-      if (e.key === 'ArrowRight') onNav(1)
-      if (e.key === 'ArrowLeft') onNav(-1)
-    }
-    document.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
+    const onKey = (e) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = item ? 'hidden' : ''
     return () => {
-      document.removeEventListener('keydown', onKey)
+      window.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
     }
-  }, [onClose, onNav])
+  }, [item, onClose])
+
+  if (!item) return null
 
   return (
-    <div className="lb" role="dialog" aria-modal="true" aria-label="Imagem ampliada" onClick={onClose}>
-      <span className="lb-count">{index + 1} / {items.length}</span>
-
-      <button
-        type="button"
-        className="lb-btn lb-close"
-        onClick={onClose}
-        aria-label="Fechar"
-      >
-        <X />
+    <div className="lightbox" role="dialog" aria-modal="true" onClick={onClose}>
+      <button className="lightbox-close" aria-label="Fechar" onClick={onClose}>
+        <X size={24} />
       </button>
-
-      <button
-        type="button"
-        className="lb-btn lb-prev"
-        onClick={(e) => { e.stopPropagation(); onNav(-1) }}
-        aria-label="Imagem anterior"
-      >
-        <ChevronLeft />
-      </button>
-
-      <figure className="lb-figure" onClick={(e) => e.stopPropagation()}>
-        <img src={item.img} alt={item.title} />
-        <figcaption className="lb-cap">
-          <span className="cat">{item.cat}</span>
+      <figure className="lightbox-figure" onClick={(e) => e.stopPropagation()}>
+        <img src={item.image} alt={item.title} />
+        <figcaption>
+          <span className="lightbox-cat">{item.category}</span>
           <h3>{item.title}</h3>
+          <p>Imagem demonstrativa — não representa um trabalho efectivamente realizado pela MAIS FÁCIL.</p>
         </figcaption>
       </figure>
-
-      <button
-        type="button"
-        className="lb-btn lb-next"
-        onClick={(e) => { e.stopPropagation(); onNav(1) }}
-        aria-label="Imagem seguinte"
-      >
-        <ChevronRight />
-      </button>
     </div>
   )
 }

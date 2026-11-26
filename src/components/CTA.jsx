@@ -1,40 +1,45 @@
-import { MessageCircle } from 'lucide-react'
-import { wa, whatsappLink } from '../utils/whatsapp.js'
-import '../styles/cta.css'
+import { ArrowRight } from 'lucide-react'
+import { heroEmpresarial } from '../assets/images.js'
+import { getWhatsAppLink, wa } from '../utils/whatsapp.js'
+import './../styles/cta.css'
 
 export default function CTA() {
+  const scrollToServices = () => {
+    const el = document.getElementById('servicos')
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
-    <section className="section cta" id="fale-connosco">
-      <span className="cta-circle c1" aria-hidden="true" />
-      <span className="cta-circle c2" aria-hidden="true" />
-
-      <div className="container cta-inner">
-        <span className="kicker kicker-center reveal">Vamos conversar</span>
-
-        <h2 className="cta-title reveal" data-delay="1">
-          A SUA PRÓXIMA IDEIA <span className="hl">COMEÇA AQUI.</span>
-        </h2>
-
-        <p className="cta-text reveal" data-delay="2">
-          Precisa de uma placa, um painel luminoso, uniformes personalizados ou materiais
-          gráficos? Fale connosco e solicite o seu orçamento.
-        </p>
-
-        <div className="cta-actions reveal" data-delay="3">
-          <a
-            className="btn btn-whatsapp btn-lg"
-            href={whatsappLink(wa.geral)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MessageCircle />
-            FALAR COM A AG PUBLICIDADE
-          </a>
+    <section className="cta" aria-labelledby="cta-title">
+      <span className="cta-diag" aria-hidden="true" />
+      <span className="cta-glow" aria-hidden="true" />
+      <div className="cta-inner">
+        <div className="cta-content reveal">
+          <span className="cta-eyebrow">Prontos a ajudar</span>
+          <h2 id="cta-title" className="cta-title">
+            A SUA IDEIA MERECE SAIR DO PAPEL.
+          </h2>
+          <p className="cta-text">
+            Tem um projecto em mente? Precisa de materiais gráficos para a sua empresa ou de
+            produtos personalizados? Estamos prontos para ajudar.
+          </p>
+          <div className="cta-actions">
+            <a
+              className="btn btn-orange btn-lg"
+              href={getWhatsAppLink(wa.geral)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir orçamento pelo WhatsApp
+            </a>
+            <button className="btn btn-ghost-light btn-lg" onClick={scrollToServices}>
+              Explorar serviços <ArrowRight size={18} />
+            </button>
+          </div>
         </div>
-
-        <p className="cta-note reveal" data-delay="4">
-          Atendimento directo e resposta rápida pelo WhatsApp.
-        </p>
+        <div className="cta-media reveal">
+          <img src={heroEmpresarial} alt="Soluções gráficas empresariais MAIS FÁCIL" loading="lazy" />
+        </div>
       </div>
     </section>
   )

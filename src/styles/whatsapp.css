@@ -1,0 +1,54 @@
+.wa-float {
+  position: fixed;
+  z-index: 150;
+  right: 22px;
+  bottom: 22px;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: #25d366;
+  box-shadow: 0 18px 34px -10px rgba(37, 211, 102, 0.7);
+  transition: transform 0.3s var(--ease);
+}
+.wa-float:hover { transform: scale(1.08) rotate(-4deg); }
+.wa-float-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25d366;
+  animation: waPulse 2.4s ease-out infinite;
+  z-index: -1;
+}
+@keyframes waPulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+.wa-float-label {
+  position: absolute;
+  right: 72px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 9px 14px;
+  border-radius: 10px;
+  white-space: nowrap;
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.wa-float:hover .wa-float-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(-4px);
+}
+
+@media (max-width: 560px) {
+  .wa-float { width: 54px; height: 54px; right: 16px; bottom: 16px; }
+  .wa-float-label { display: none; }
+}

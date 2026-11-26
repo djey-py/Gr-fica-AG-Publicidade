@@ -1,25 +1,50 @@
-import paineis from '../assets/images/hero-panel.jpg'
-import letras3d from '../assets/images/pf-letras3d.jpg'
-import placa from '../assets/images/pf-placa.jpg'
-import banner from '../assets/images/pf-banner.jpg'
-import rollup from '../assets/images/pf-rollup.jpg'
-import uniformes from '../assets/images/pf-uniformes.jpg'
-import vinil from '../assets/images/pf-vinil.jpg'
-import cartoes from '../assets/images/pf-cartoes.jpg'
-import sacolas from '../assets/images/pf-sacolas.jpg'
+// Galeria de portfólio (demonstração). Imagens ilustrativas — não representam
+// trabalhos efectivamente realizados pela MAIS FÁCIL.
+import {
+  svcDesign,
+  svcImpressao,
+  svcBanners,
+  svcPersonalizacao,
+  svcCarimbos,
+  svcIdentificacao,
+  svcBrindes,
+  heroIdentidade,
+  heroPersonalizacao,
+  heroPublicidade,
+  heroEmpresarial,
+  pfDesign,
+  pfBanner,
+  pfTshirt,
+  pfGifts,
+} from '../assets/images.js'
 
-export const portfolioCats = ['Todos', 'Sinalização', 'Impressão', 'Personalização', 'Gráfico']
+// Categorias usadas nos filtros.
+export const categories = [
+  'Todos',
+  'Design gráfico',
+  'Impressão',
+  'Publicidade',
+  'Personalização',
+  'Identificação',
+  'Brindes',
+]
 
-// Galeria de demonstração: apresenta possibilidades de produção,
-// não trabalhos específicos entregues a clientes.
-export const portfolioItems = [
-  { id: 'paineis', title: 'Painéis luminosos', cat: 'Sinalização', img: paineis, span: 'sp-big' },
-  { id: 'letras', title: 'Letras 3D', cat: 'Sinalização', img: letras3d, span: '' },
-  { id: 'placas', title: 'Placas comerciais', cat: 'Sinalização', img: placa, span: '' },
-  { id: 'banners', title: 'Banners', cat: 'Impressão', img: banner, span: '' },
-  { id: 'rollups', title: 'Roll-ups', cat: 'Impressão', img: rollup, span: '' },
-  { id: 'uniformes', title: 'Uniformes personalizados', cat: 'Personalização', img: uniformes, span: '' },
-  { id: 'vinil', title: 'Impressão de vinil', cat: 'Impressão', img: vinil, span: '' },
-  { id: 'cartoes', title: 'Cartões de visita', cat: 'Gráfico', img: cartoes, span: '' },
-  { id: 'sacolas', title: 'Sacolas personalizadas', cat: 'Gráfico', img: sacolas, span: '' },
+// size controla o destaque na grelha assimétrica: 'lg' (grande), 'md' (médio), 'sm' (pequeno).
+export const portfolio = [
+  { id: 1, category: 'Design gráfico', title: 'Identidade visual corporativa', image: heroIdentidade, size: 'lg' },
+  { id: 2, category: 'Design gráfico', title: 'Criação de logótipo', image: pfDesign, size: 'md' },
+  { id: 3, category: 'Design gráfico', title: 'Cartões de visita', image: svcDesign, size: 'sm' },
+  { id: 4, category: 'Impressão', title: 'Flyers e panfletos', image: svcImpressao, size: 'md' },
+  { id: 5, category: 'Impressão', title: 'Material promocional', image: pfGifts, size: 'lg' },
+  { id: 6, category: 'Impressão', title: 'Brochuras', image: heroEmpresarial, size: 'sm' },
+  { id: 7, category: 'Publicidade', title: 'Banners e lonas', image: heroPublicidade, size: 'lg' },
+  { id: 8, category: 'Publicidade', title: 'Roll-up e bandeiras', image: svcBanners, size: 'md' },
+  { id: 9, category: 'Publicidade', title: 'Campanha exterior', image: pfBanner, size: 'sm' },
+  { id: 10, category: 'Personalização', title: 'T-shirts personalizadas', image: heroPersonalizacao, size: 'md' },
+  { id: 11, category: 'Personalização', title: 'Estampagem de produtos', image: pfTshirt, size: 'lg' },
+  { id: 12, category: 'Personalização', title: 'Uniformes de equipa', image: svcPersonalizacao, size: 'sm' },
+  { id: 13, category: 'Identificação', title: 'Passes PVC', image: svcIdentificacao, size: 'md' },
+  { id: 14, category: 'Identificação', title: 'Crachás profissionais', image: svcCarimbos, size: 'sm' },
+  { id: 15, category: 'Brindes', title: 'Canecas e cantis', image: svcBrindes, size: 'lg' },
+  { id: 16, category: 'Brindes', title: 'Brindes empresariais', image: pfGifts, size: 'md' },
 ]
