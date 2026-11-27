@@ -1,0 +1,86 @@
+.why { background: var(--bg-soft); }
+
+.why__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 34px;
+  margin-top: 56px;
+  align-items: start;
+}
+
+/* Painel de marca */
+.why__brand {
+  position: sticky;
+  top: 96px;
+  background: var(--grad-brand);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 34px 32px 36px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.why__brand-art {
+  width: 130px;
+  aspect-ratio: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0a1740;
+  margin-bottom: 22px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+}
+.why__brand-tag {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  display: block;
+  margin-bottom: 12px;
+}
+.why__brand-text {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.02rem;
+  margin-bottom: 26px;
+}
+
+/* Lista de diferenciais */
+.why__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.why__item {
+  display: flex;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 22px;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.why__item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+  border-color: rgba(8, 123, 255, 0.35);
+}
+.why__item-icon {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #eef3ff;
+  color: var(--electric);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+.why__item:hover .why__item-icon { background: var(--grad-electric); color: #fff; }
+.why__item h3 { font-size: 1.1rem; margin-bottom: 4px; }
+.why__item p { font-size: 0.92rem; color: var(--muted); margin: 0; }
+
+@media (max-width: 960px) {
+  .why__grid { grid-template-columns: 1fr; }
+  .why__brand { position: static; }
+}
+@media (max-width: 560px) {
+  .why__list { grid-template-columns: 1fr; }
+}

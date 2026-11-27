@@ -1,85 +1,63 @@
 import { useState } from 'react'
-import { ZoomIn } from 'lucide-react'
-import { portfolioCats, portfolioItems } from '../data/portfolio.js'
+import { Maximize2 } from 'lucide-react'
 import SectionHeading from './SectionHeading.jsx'
+import WorkMockup from './WorkMockup.jsx'
 import Lightbox from './Lightbox.jsx'
+import { portfolioItems, portfolioCats } from '../data/portfolio.js'
 import '../styles/portfolio.css'
 
 export default function Portfolio() {
-  const [filter, setFilter] = useState('Todos')
-  const [current, setCurrent] = useState(null)
+  const [cat, setCat] = useState('Todos')
+  const [active, setActive] = useState(null)
 
-  const items =
-    filter === 'Todos'
-      ? portfolioItems
-      : portfolioItems.filter((p) => p.cat === filter)
-
-  const openItem = (i) => setCurrent(i)
+  const filtered =
+    cat === 'Todos' ? portfolioItems : portfolioItems.filter((p) => p.cat === cat)
 
   return (
     <section className="section portfolio" id="portfolio">
       <div className="container">
         <SectionHeading
-          center
-          kicker="Portfólio"
-          title="IDEIAS QUE GANHAM VIDA."
-          desc="Conheça algumas das possibilidades que podemos criar para valorizar a sua marca."
+          eyebrow="Portfólio"
+          title={<>Criatividade que se transforma em <span className="hl-e">resultados.</span></>}
+          subtitle="Uma vitrine visual das possibilidades de produção da Gráfica Online BP — flyers, cartazes, identidades, redes sociais e muito mais."
         />
 
-        <div className="pf-filters reveal" role="group" aria-label="Filtrar portfólio">
+        <div className="portfolio__filters reveal d1" role="tablist" aria-label="Categorias do portfólio">
           {portfolioCats.map((c) => (
             <button
               key={c}
-              type="button"
-              className={`pf-filter ${filter === c ? 'active' : ''}`}
-              onClick={() => setFilter(c)}
+              role="tab"
+              aria-selected={cat === c}
+              className={`portfolio__filter ${cat === c ? 'is-active' : ''}`}
+              onClick={() => setCat(c)}
             >
               {c}
             </button>
           ))}
         </div>
 
-        <div className="pf-grid reveal">
-          {items.map((item, i) => (
-            <div
-              className={`pf-item ${item.span}`}
-              key={item.id}
-              role="button"
-              tabIndex={0}
-              aria-label={`Ampliar: ${item.title}`}
-              onClick={() => openItem(i)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  openItem(i)
-                }
-              }}
+        <div className="portfolio__grid">
+          {filtered.map((p, i) => (
+            <button
+              key={p.id}
+              className={`pf-item pf-item--${p.span} reveal d${(i % 5) + 1}`}
+              onClick={() => setActive(p)}
+              aria-label={`Ver ${p.title}`}
             >
-              <img src={item.img} alt={item.title} loading="lazy" />
-              <span className="pf-zoom"><ZoomIn /></span>
-              <span className="pf-meta">
-                <span className="cat">{item.cat}</span>
-                <h3>{item.title}</h3>
+              <div className="pf-item__media">
+                <WorkMockup variant={p.variant} accent={p.accent} tone={p.tone || 'dark'} />
+              </div>
+              <span className="pf-item__overlay">
+                <Maximize2 size={20} />
+                <span className="pf-item__title">{p.title}</span>
+                <span className="pf-item__cat">{p.cat}</span>
               </span>
-            </div>
+            </button>
           ))}
         </div>
-
-        <p className="pf-note reveal">
-          Galeria de demonstração — cada projecto é desenvolvido à medida de cada cliente.
-        </p>
       </div>
 
-      {current !== null && (
-        <Lightbox
-          items={items}
-          index={current}
-          onClose={() => setCurrent(null)}
-          onNav={(d) =>
-            setCurrent((c) => (c + d + items.length) % items.length)
-          }
-        />
-      )}
+      <Lightbox item={active} onClose={() => setActive(null)} />
     </section>
   )
 }

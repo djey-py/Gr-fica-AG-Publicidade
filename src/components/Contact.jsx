@@ -1,123 +1,83 @@
-import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
-import qrWhatsapp from '../assets/images/qr-whatsapp.png'
-import { wa, whatsappLink } from '../utils/whatsapp.js'
+import { MessageCircle, MapPin, Clock, ExternalLink } from 'lucide-react'
 import SectionHeading from './SectionHeading.jsx'
+import { whatsappLink, wa } from '../utils/whatsapp.js'
 import '../styles/contact.css'
 
 const MAP_SRC =
-  'https://maps.google.com/maps?q=Kilamba%20Vila%20Flor%2C%20Luanda%2C%20Angola&t=&z=13&ie=UTF8&iwloc=&output=embed'
+  'https://www.google.com/maps?q=' +
+  encodeURIComponent('Escongolense, Rua C9 de Cima, Angola') +
+  '&output=embed'
 
 export default function Contact() {
   return (
     <section className="section contact" id="contactos">
       <div className="container">
         <SectionHeading
-          center
-          kicker="Contactos"
-          title="VAMOS DAR VIDA À SUA IDEIA?"
-          desc="Fale directamente com a nossa equipa e receba o orçamento do seu projecto."
+          eyebrow="Contactos"
+          title={<>Vamos transformar a sua <span className="hl-e">ideia</span> em realidade.</>}
+          subtitle="Fale connosco pelo WhatsApp ou visite-nos. Estamos prontos para criar a solução visual ideal para o seu negócio."
         />
 
-        <div className="contact-grid">
-          <div className="c-cards">
-            <article className="c-card reveal">
-              <span className="c-ico green"><MessageCircle /></span>
-              <span>
-                <span className="c-label">WhatsApp</span>
-                <span className="c-value">956 967 295</span>
+        <div className="contact__grid reveal d1">
+          <div className="contact__info">
+            <a
+              href={whatsappLink(wa.orcamento)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact__wa"
+            >
+              <span className="contact__wa-icon"><MessageCircle size={26} /></span>
+              <span className="contact__wa-text">
+                <strong>Fale pelo WhatsApp</strong>
+                <span>+244 976 508 422</span>
               </span>
-              <a
-                className="btn-mini green"
-                href={whatsappLink(wa.geral)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Abrir WhatsApp
-              </a>
-            </article>
+              <ExternalLink size={18} className="contact__wa-arrow" />
+            </a>
 
-            <article className="c-card reveal" data-delay="1">
-              <span className="c-ico"><Phone /></span>
-              <span>
-                <span className="c-label">Telefone alternativo</span>
-                <span className="c-value">931 354 068</span>
-              </span>
-              <a className="btn-mini" href="tel:+244931354068">Ligar agora</a>
-            </article>
+            <ul className="contact__list">
+              <li>
+                <span className="contact__list-icon"><MapPin size={20} /></span>
+                <div>
+                  <strong>Localização</strong>
+                  <p>Escongolense, Rua C9 de Cima</p>
+                </div>
+              </li>
+              <li>
+                <span className="contact__list-icon"><Clock size={20} /></span>
+                <div>
+                  <strong>Atendimento</strong>
+                  <p>Contacte-nos a qualquer altura via WhatsApp</p>
+                </div>
+              </li>
+            </ul>
 
-            <article className="c-card reveal" data-delay="2">
-              <span className="c-ico"><Mail /></span>
-              <span>
-                <span className="c-label">Email</span>
-                <span className="c-value">graficaagpublicidade@gmail.com</span>
-              </span>
-              <a className="btn-mini" href="mailto:graficaagpublicidade@gmail.com">Enviar email</a>
-            </article>
-
-            <article className="c-card reveal" data-delay="3">
-              <span className="c-ico"><MapPin /></span>
-              <span>
-                <span className="c-label">Localização</span>
-                <span className="c-value">Luanda · Kilamba, Bairro Vila Flor</span>
-              </span>
-              <a
-                className="btn-mini"
-                href="https://www.google.com/maps/search/?api=1&query=Kilamba+Vila+Flor+Luanda"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ver no mapa
-              </a>
-            </article>
+            <a
+              href={whatsappLink(wa.orcamento)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn--primary btn--block contact__cta"
+            >
+              <MessageCircle /> Solicitar Orçamento
+            </a>
           </div>
 
-          <div className="contact-side">
-            <div className="qr-card reveal" data-delay="1">
-              <h3>Fale connosco agora</h3>
-              <p>Aponte a câmara do seu telefone para o código e abra a conversa no WhatsApp.</p>
-              <img
-                className="qr"
-                src={qrWhatsapp}
-                alt="Código QR para o WhatsApp da AG Publicidade"
-                loading="lazy"
-              />
-              <a
-                className="qr-link"
-                href={whatsappLink(wa.geral)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                wa.me/244956967295
-              </a>
-            </div>
-
-            <div className="social-row reveal" data-delay="2">
-              <div className="social-chip">
-                <span className="si fb"><Facebook /></span>
-                <span>
-                  <strong>Facebook</strong>
-                  <small>Encontre-nos: Gráfica AG Publicidade</small>
-                </span>
-              </div>
-              <div className="social-chip">
-                <span className="si ig"><Instagram /></span>
-                <span>
-                  <strong>Instagram</strong>
-                  <small>Encontre-nos: Gráfica AG Publicidade</small>
-                </span>
-              </div>
-            </div>
+          <div className="contact__map">
+            <iframe
+              title="Localização da Gráfica Online BP"
+              src={MAP_SRC}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <a
+              className="contact__map-link"
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Escongolense, Rua C9 de Cima, Angola')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Abrir no Google Maps <ExternalLink size={15} />
+            </a>
           </div>
-        </div>
-
-        <div className="map-wrap reveal" data-delay="1">
-          <iframe
-            title="Localização da AG Publicidade — Kilamba, Luanda"
-            src={MAP_SRC}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
         </div>
       </div>
     </section>

@@ -1,93 +1,77 @@
-import { ArrowUp, Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
-import logo from '../assets/images/logo-ag.png'
-import { wa, whatsappLink } from '../utils/whatsapp.js'
+import { MessageCircle, MapPin } from 'lucide-react'
+import Logo from './Logo.jsx'
+import { whatsappLink, wa } from '../utils/whatsapp.js'
+import { services } from '../data/services.js'
 import '../styles/footer.css'
 
 const NAV = [
-  { id: 'inicio', label: 'Início' },
-  { id: 'servicos', label: 'Serviços' },
-  { id: 'produtos', label: 'Produtos' },
-  { id: 'portfolio', label: 'Portfólio' },
-  { id: 'sobre', label: 'Sobre nós' },
-  { id: 'contactos', label: 'Contactos' },
-]
-
-const SERVICES = [
-  'Comunicação Visual',
-  'Placas e Sinalização',
-  'Impressão Digital',
-  'Personalização',
-  'Material Gráfico',
+  { label: 'Início', href: '#inicio' },
+  { label: 'Serviços', href: '#servicos' },
+  { label: 'Portfólio', href: '#portfolio' },
+  { label: 'Sobre nós', href: '#sobre' },
+  { label: 'Contactos', href: '#contactos' },
 ]
 
 export default function Footer() {
   return (
     <footer className="footer">
-      <div className="container">
-        <div className="footer-grid">
-          <div className="f-brand">
-            <img src={logo} alt="Logótipo AG Publicidade" loading="lazy" />
-            <p>
-              Gráfica e empresa de comunicação visual em Luanda. Criamos, fabricamos,
-              imprimimos e montamos soluções publicitárias que dão vida à sua marca.
-            </p>
-            <span className="f-slogan">AG Publicidade — Qualidade e rapidez moram aqui.</span>
-            <div className="f-social">
-              <span className="f-soc" title="Facebook: Gráfica AG Publicidade"><Facebook /></span>
-              <span className="f-soc" title="Instagram: Gráfica AG Publicidade"><Instagram /></span>
-            </div>
-          </div>
-
-          <div className="f-col">
-            <h4>Navegação</h4>
-            <ul>
-              {NAV.map((l) => (
-                <li key={l.id}><a href={`#${l.id}`}>{l.label}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="f-col">
-            <h4>Serviços</h4>
-            <ul>
-              {SERVICES.map((s) => (
-                <li key={s}><a href="#servicos">{s}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="f-col">
-            <h4>Contactos</h4>
-            <ul className="f-contact">
-              <li>
-                <MessageCircle />
-                <a href={whatsappLink(wa.geral)} target="_blank" rel="noopener noreferrer">
-                  WhatsApp: 956 967 295
-                </a>
-              </li>
-              <li>
-                <Phone />
-                <a href="tel:+244931354068">Tel: 931 354 068</a>
-              </li>
-              <li>
-                <Mail />
-                <a href="mailto:graficaagpublicidade@gmail.com">graficaagpublicidade@gmail.com</a>
-              </li>
-              <li>
-                <MapPin />
-                <span>Luanda · Kilamba, Bairro Vila Flor</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} AG Publicidade. Todos os direitos reservados.</span>
-          <a className="to-top" href="#inicio">
-            Voltar ao topo
-            <ArrowUp />
+      <div className="container footer__inner">
+        <div className="footer__brand">
+          <Logo variant="light" height={44} />
+          <p>
+            Mais que impressão, criamos valor para a sua marca. Do design à impressão,
+            soluções visuais que destacam o seu negócio.
+          </p>
+          <a
+            href={whatsappLink(wa.orcamento)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--yellow footer__wa"
+          >
+            <MessageCircle /> Falar pelo WhatsApp
           </a>
         </div>
+
+        <div className="footer__col">
+          <h4>Navegação</h4>
+          <ul>
+            {NAV.map((n) => (
+              <li key={n.href}><a href={n.href}>{n.label}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="footer__col">
+          <h4>Serviços</h4>
+          <ul>
+            {services.slice(0, 6).map((s) => (
+              <li key={s.id}>
+                <a href={whatsappLink(wa.servico(s.nome))} target="_blank" rel="noopener noreferrer">
+                  {s.nome}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="footer__col">
+          <h4>Contactos</h4>
+          <ul className="footer__contact">
+            <li>
+              <MessageCircle size={17} />
+              <a href={whatsappLink(wa.geral)} target="_blank" rel="noopener noreferrer">+244 976 508 422</a>
+            </li>
+            <li>
+              <MapPin size={17} />
+              <span>Escongolense, Rua C9 de Cima</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="container footer__bottom">
+        <span>© {new Date().getFullYear()} Gráfica Online BP. Todos os direitos reservados.</span>
+        <span className="footer__slogan">A sua marca em outro nível!</span>
       </div>
     </footer>
   )

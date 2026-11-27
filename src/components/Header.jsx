@@ -1,135 +1,85 @@
-import { useEffect, useRef, useState } from 'react'
-import { Menu, MessageCircle, X } from 'lucide-react'
-import logo from '../assets/images/logo-ag.png'
-import { wa, whatsappLink } from '../utils/whatsapp.js'
+import { useEffect, useState } from 'react'
+import { Menu, X, MessageCircle } from 'lucide-react'
+import Logo from './Logo.jsx'
+import { whatsappLink, wa } from '../utils/whatsapp.js'
 import '../styles/header.css'
 
-const LINKS = [
-  { id: 'inicio', label: 'Início' },
-  { id: 'servicos', label: 'Serviços' },
-  { id: 'produtos', label: 'Produtos' },
-  { id: 'portfolio', label: 'Portfólio' },
-  { id: 'sobre', label: 'Sobre nós' },
-  { id: 'contactos', label: 'Contactos' },
+const NAV = [
+  { label: 'Início', href: '#inicio' },
+  { label: 'Serviços', href: '#servicos' },
+  { label: 'Portfólio', href: '#portfolio' },
+  { label: 'Sobre nós', href: '#sobre' },
+  { label: 'Contactos', href: '#contactos' },
 ]
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
-  const [hidden, setHidden] = useState(false)
-  const [active, setActive] = useState('inicio')
   const [open, setOpen] = useState(false)
-  const lastY = useRef(0)
 
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY
-      setScrolled(y > 24)
-
-      // Esconde ao descer, revela ao subir (evita sobrepor o rodapé no fim da página)
-      if (y > lastY.current && y > 200 && !open) {
-        setHidden(true)
-      } else if (y < lastY.current || y <= 200) {
-        setHidden(false)
-      }
-      lastY.current = y
-
-      const pos = y + 140
-      let current = 'inicio'
-      LINKS.forEach((l) => {
-        const el = document.getElementById(l.id)
-        if (el && el.offsetTop <= pos) current = l.id
-      })
-      setActive(current)
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
+    const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [open])
+  }, [])
 
+  // Bloqueia o scroll do body quando o menu mobile está aberto
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
+    return () => { document.body.style.overflow = '' }
   }, [open])
 
-  const closeMenu = () => setOpen(false)
+  const variant = scrolled || open ? 'dark' : 'light'
 
   return (
-    <>
-      <header className={`header ${scrolled ? 'scrolled' : ''} ${hidden && !open ? 'hide' : ''}`}>
-        <div className="container header-inner">
-          <a href="#inicio" className="brand" onClick={closeMenu}>
-            <img src={logo} alt="Logótipo AG Publicidade" />
-            <span className="brand-text">
-              <span className="brand-name">
-                AG <span>Publicidade</span>
-              </span>
-              <span className="brand-tag">Qualidade e rapidez moram aqui</span>
-            </span>
-          </a>
+    <header className={`site-header ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-open' : ''}`}>
+      <div className="container site-header__inner">
+        <a href="#inicio" className="site-header__logo" aria-label="Gráfica Online BP — início">
+          <Logo variant={variant} height={42} />
+        </a>
 
-          <nav className="nav" aria-label="Navegação principal">
-            {LINKS.map((l) => (
-              <a key={l.id} href={`#${l.id}`} className={active === l.id ? 'active' : ''}>
-                {l.label}
-              </a>
-            ))}
-          </nav>
-
-          <a
-            className="btn btn-primary header-cta"
-            href={whatsappLink(wa.geral)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MessageCircle />
-            Solicitar orçamento
-          </a>
-
-          <button
-            className="burger"
-            onClick={() => setOpen(true)}
-            aria-label="Abrir menu"
-            aria-expanded={open}
-          >
-            <Menu />
-          </button>
-        </div>
-      </header>
-
-      <div className={`mobile-menu ${open ? 'open' : ''}`} role="dialog" aria-modal="true">
-        <div className="mm-top">
-          <a href="#inicio" className="brand brand-light" onClick={closeMenu}>
-            <img src={logo} alt="Logótipo AG Publicidade" />
-            <span className="brand-name">AG <span>Publicidade</span></span>
-          </a>
-          <button className="mm-close" onClick={closeMenu} aria-label="Fechar menu">
-            <X />
-          </button>
-        </div>
-
-        <nav className="mm-links" aria-label="Navegação móvel">
-          {LINKS.map((l) => (
-            <a key={l.id} href={`#${l.id}`} className={active === l.id ? 'active' : ''} onClick={closeMenu}>
-              {l.label}
+        <nav className="site-header__nav" aria-label="Navegação principal">
+          {NAV.map((item) => (
+            <a key={item.href} href={item.href} className="site-header__link">
+              {item.label}
             </a>
           ))}
         </nav>
 
-        <div className="mm-bottom">
-          <a
-            className="btn btn-whatsapp btn-lg"
-            href={whatsappLink(wa.geral)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MessageCircle />
-            Solicitar orçamento
+        <div className="site-header__actions">
+          <a href={whatsappLink(wa.orcamento)} target="_blank" rel="noopener noreferrer" className="btn btn--yellow site-header__cta">
+            <MessageCircle /> Solicitar Orçamento
           </a>
-          <p className="mm-contact">WhatsApp: 956 967 295 · Luanda, Kilamba</p>
+          <button
+            className="site-header__burger"
+            aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X /> : <Menu />}
+          </button>
         </div>
       </div>
-    </>
+
+      {/* Menu mobile */}
+      <div className="site-header__mobile" role="dialog" aria-hidden={!open}>
+        <nav className="site-header__mobile-nav">
+          {NAV.map((item) => (
+            <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
+              {item.label}
+            </a>
+          ))}
+          <a
+            href={whatsappLink(wa.orcamento)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--yellow btn--block"
+            onClick={() => setOpen(false)}
+          >
+            <MessageCircle /> Solicitar Orçamento
+          </a>
+        </nav>
+      </div>
+    </header>
   )
 }

@@ -1,9 +1,9 @@
 import Header from './components/Header.jsx'
 import Hero from './components/Hero.jsx'
 import Services from './components/Services.jsx'
-import FeaturedSigns from './components/FeaturedSigns.jsx'
 import Portfolio from './components/Portfolio.jsx'
-import About from './components/About.jsx'
+import DigitalBooks from './components/DigitalBooks.jsx'
+import WhyChoose from './components/WhyChoose.jsx'
 import CTA from './components/CTA.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
@@ -19,9 +19,9 @@ export default function App() {
       <main>
         <Hero />
         <Services />
-        <FeaturedSigns />
         <Portfolio />
-        <About />
+        <DigitalBooks />
+        <WhyChoose />
         <CTA />
         <Contact />
       </main>

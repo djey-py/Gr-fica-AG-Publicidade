@@ -1,84 +1,105 @@
-import luzImg from '../assets/images/svc-visual.jpg'
-import placasImg from '../assets/images/svc-placas.jpg'
-import impressaoImg from '../assets/images/svc-impressao.jpg'
-import personalizacaoImg from '../assets/images/svc-personalizacao.jpg'
-import graficoImg from '../assets/images/svc-grafico.jpg'
-
+// Serviços da Gráfica Online BP.
+// Cada serviço tem ícone (lucide-react), ilustração (WorkMockup) e CTA WhatsApp.
 export const services = [
   {
-    id: 'comunicacao-visual',
-    icon: 'luz',
-    nome: 'Comunicação Visual',
+    id: 'design-grafico',
+    icon: 'PenTool',
+    nome: 'Design Gráfico Profissional',
     descricao:
-      'Da concepção à montagem: damos rosto e presença à sua marca, com produção própria e acabamento profissional.',
-    itens: [
-      'Painéis luminosos',
-      'Letras 3D',
-      'Cruz de farmácia',
-      'Caixas luminosas',
-      'Placas publicitárias',
-    ],
-    imagem: luzImg,
+      'Criamos peças gráficas com identidade, do conceito à arte final — prontas para impressão ou para o digital.',
+    tags: ['Catálogos', 'Folders', 'Artes finais'],
+    accent: 'blue',
+    mockup: 'poster',
+    size: 'lg',
   },
   {
-    id: 'placas-sinalizacao',
-    icon: 'sinalizacao',
-    nome: 'Placas e Sinalização',
+    id: 'flyers-cartazes',
+    icon: 'Megaphone',
+    nome: 'Flyers e Cartazes',
     descricao:
-      'Sinalização profissional para orientar, informar e valorizar o seu espaço comercial ou institucional.',
-    itens: [
-      'Placas fotoluminescentes',
-      'Placas refletoras',
-      'Placas normais',
-      'Sinalização profissional',
-    ],
-    imagem: placasImg,
+      'Flyers, cartazes e folhetos que comunicam a sua mensagem com impacto, cor e clareza.',
+    tags: ['A3 / A4 / A5', 'Alta resolução'],
+    accent: 'royal',
+    mockup: 'flyer',
+    size: 'sm',
   },
   {
-    id: 'impressao-digital',
-    icon: 'impressao',
-    nome: 'Impressão Digital',
+    id: 'identidade',
+    icon: 'Fingerprint',
+    nome: 'Logótipos e Identidade Visual',
     descricao:
-      'Impressão de grande formato e alta definição para campanhas com verdadeiro impacto visual.',
-    itens: [
-      'Impressão de lonas',
-      'Impressão em vinil',
-      'Impressão DTF',
-      'Impressão UV',
-      'Banners',
-      'Roll-up',
-      'Balcões publicitários',
-    ],
-    imagem: impressaoImg,
+      'Desenvolvemos logótipos e sistemas de marca que tornam o seu negócio memorável e profissional.',
+    tags: ['Logo', 'Manual de marca'],
+    accent: 'navy',
+    mockup: 'logo',
+    tone: 'light',
+    size: 'sm',
   },
   {
-    id: 'personalizacao',
-    icon: 'personalizacao',
-    nome: 'Personalização',
+    id: 'marketing-digital',
+    icon: 'Target',
+    nome: 'Marketing Digital',
     descricao:
-      'Leve a sua marca para o dia-a-dia: têxteis, uniformes e brindes personalizados com acabamento de qualidade.',
-    itens: [
-      'Estampagem',
-      'Bordados',
-      'Serigrafia',
-      'Personalização de uniformes',
-      'Brindes personalizados',
-    ],
-    imagem: personalizacaoImg,
+      'Estratégias digitais para aumentar a visibilidade, o alcance e os resultados da sua marca.',
+    tags: ['Estratégia', 'Conteúdo'],
+    accent: 'blue',
+    mockup: 'banner',
+    size: 'md',
   },
   {
-    id: 'material-grafico',
-    icon: 'grafico',
-    nome: 'Material Gráfico',
+    id: 'redes-sociais',
+    icon: 'Share2',
+    nome: 'Gestão de Redes Sociais',
     descricao:
-      'As peças essenciais do seu negócio, impressas com cores vivas e acabamento profissional.',
-    itens: [
-      'Cartões de visita',
-      'Cartões PVC',
-      'Convites',
-      'Sacolas personalizadas',
-      'Materiais promocionais',
-    ],
-    imagem: graficoImg,
+      'Gerimos o seu conteúdo e a presença social para fidelizar seguidores e conquistar clientes.',
+    tags: ['Instagram', 'Facebook'],
+    accent: 'royal',
+    mockup: 'social',
+    size: 'sm',
+  },
+  {
+    id: 'trafego-pago',
+    icon: 'MousePointerClick',
+    nome: 'Tráfego Pago (Facebook e Instagram Ads)',
+    descricao:
+      'Campanhas de anúncios segmentadas para levar os clientes certos até ao seu negócio.',
+    tags: [' Ads', 'Conversão'],
+    accent: 'mix',
+    mockup: 'banner',
+    size: 'md',
+  },
+  {
+    id: 'video',
+    icon: 'Video',
+    nome: 'Edição de Vídeos Promocionais',
+    descricao:
+      'Vídeos dinâmicos e profissionais que contam a história da sua marca e engajam o público.',
+    tags: ['Reels', 'Comerciais'],
+    accent: 'blue',
+    mockup: 'poster',
+    size: 'sm',
+  },
+  {
+    id: 'newsletter',
+    icon: 'Mail',
+    nome: 'Newsletter',
+    descricao:
+      'Comunicação por email bem desenhada que mantém a sua marca presente junto dos clientes.',
+    tags: ['Email marketing'],
+    accent: 'navy',
+    mockup: 'card',
+    size: 'sm',
+  },
+  {
+    id: 'outros',
+    icon: 'Sparkles',
+    nome: 'Outros serviços criativos',
+    descricao:
+      'Soluções à medida: convites, personalização e ideias criativas para o seu projecto.',
+    tags: ['À medida', 'Criativo'],
+    accent: 'yellow',
+    mockup: 'invite',
+    tone: 'light',
+    size: 'sm',
   },
 ]

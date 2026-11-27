@@ -1,40 +1,29 @@
-import { MessageCircle } from 'lucide-react'
-import { wa, whatsappLink } from '../utils/whatsapp.js'
+import { MessageCircle, ArrowRight } from 'lucide-react'
+import { whatsappLink, wa } from '../utils/whatsapp.js'
 import '../styles/cta.css'
 
 export default function CTA() {
   return (
-    <section className="section cta" id="fale-connosco">
-      <span className="cta-circle c1" aria-hidden="true" />
-      <span className="cta-circle c2" aria-hidden="true" />
-
-      <div className="container cta-inner">
-        <span className="kicker kicker-center reveal">Vamos conversar</span>
-
-        <h2 className="cta-title reveal" data-delay="1">
-          A SUA PRÓXIMA IDEIA <span className="hl">COMEÇA AQUI.</span>
+    <section className="section cta" id="falar">
+      <span className="glow cta__glow-1" aria-hidden="true" />
+      <span className="glow cta__glow-2" aria-hidden="true" />
+      <div className="container cta__inner reveal">
+        <span className="eyebrow"><MessageCircle size={15} /> Vamos trabalhar juntos</span>
+        <h2 className="cta__title">
+          A sua próxima grande <span className="hl-grad">ideia</span> começa aqui!
         </h2>
-
-        <p className="cta-text reveal" data-delay="2">
-          Precisa de uma placa, um painel luminoso, uniformes personalizados ou materiais
-          gráficos? Fale connosco e solicite o seu orçamento.
+        <p className="cta__text">
+          Tem um projecto em mente? Vamos transformar a sua ideia numa solução visual
+          que faça a diferença.
         </p>
-
-        <div className="cta-actions reveal" data-delay="3">
-          <a
-            className="btn btn-whatsapp btn-lg"
-            href={whatsappLink(wa.geral)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MessageCircle />
-            FALAR COM A AG PUBLICIDADE
-          </a>
-        </div>
-
-        <p className="cta-note reveal" data-delay="4">
-          Atendimento directo e resposta rápida pelo WhatsApp.
-        </p>
+        <a
+          href={whatsappLink(wa.especialista)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn--yellow cta__btn"
+        >
+          <MessageCircle /> Falar com um especialista <ArrowRight size={18} />
+        </a>
       </div>
     </section>
   )

@@ -1,86 +1,56 @@
-import { ArrowRight, Layers, Lightbulb, MessageCircle, Printer, Shirt, Signpost } from 'lucide-react'
-import { services } from '../data/services.js'
-import { wa, whatsappLink } from '../utils/whatsapp.js'
+import { PenTool, Megaphone, Fingerprint, Target, Share2, MousePointerClick, Video, Mail, Sparkles, ArrowRight } from 'lucide-react'
 import SectionHeading from './SectionHeading.jsx'
+import WorkMockup from './WorkMockup.jsx'
+import { services } from '../data/services.js'
+import { whatsappLink, wa } from '../utils/whatsapp.js'
 import '../styles/services.css'
 
-const ICONS = {
-  luz: Lightbulb,
-  sinalizacao: Signpost,
-  impressao: Printer,
-  personalizacao: Shirt,
-  grafico: Layers,
-}
+const ICONS = { PenTool, Megaphone, Fingerprint, Target, Share2, MousePointerClick, Video, Mail, Sparkles }
 
 export default function Services() {
   return (
     <section className="section services" id="servicos">
       <div className="container">
         <SectionHeading
-          kicker="Serviços"
-          title={
-            <>
-              TUDO O QUE A SUA MARCA PRECISA PARA <span className="hl">SE DESTACAR.</span>
-            </>
-          }
-          desc="Oferecemos soluções completas de publicidade, impressão e personalização para empresas, negócios e particulares."
+          eyebrow="Os nossos serviços"
+          title={<>Tudo o que a sua marca precisa para se <span className="hl-e">destacar.</span></>}
+          subtitle="Oferecemos soluções criativas e profissionais para fortalecer a presença da sua marca no mercado."
         />
 
-        <div className="svc-grid">
+        <div className="services__grid">
           {services.map((s, i) => {
-            const Icon = ICONS[s.icon]
+            const Icon = ICONS[s.icon] || Sparkles
             return (
-              <article className="svc-card reveal" data-delay={i % 3} key={s.id}>
-                <div className="svc-media">
-                  <img src={s.imagem} alt={`Serviço de ${s.nome}`} loading="lazy" />
-                  <span className="svc-num">0{i + 1}</span>
+              <article
+                key={s.id}
+                className={`svc-card svc-card--${s.size} reveal d${(i % 5) + 1}`}
+              >
+                <div className="svc-card__media">
+                  <WorkMockup variant={s.mockup} accent={s.accent} tone={s.tone || 'dark'} className="svc-card__art" />
+                  <span className="svc-card__icon"><Icon size={22} /></span>
                 </div>
-
-                <div className="svc-body">
-                  <div className="svc-title-row">
-                    <span className="svc-ico"><Icon /></span>
-                    <h3>{s.nome}</h3>
-                  </div>
-
-                  <p>{s.descricao}</p>
-
-                  <div className="svc-tags">
-                    {s.itens.slice(0, 4).map((it) => (
-                      <span className="tag" key={it}>{it}</span>
-                    ))}
-                    {s.itens.length > 4 && <span className="tag more">+{s.itens.length - 4} mais</span>}
-                  </div>
-
+                <div className="svc-card__body">
+                  <h3 className="svc-card__title">{s.nome}</h3>
+                  <p className="svc-card__desc">{s.descricao}</p>
+                  {s.tags && (
+                    <ul className="svc-card__tags">
+                      {s.tags.map((t) => (
+                        <li key={t}>{t}</li>
+                      ))}
+                    </ul>
+                  )}
                   <a
-                    className="btn btn-ghost svc-btn"
                     href={whatsappLink(wa.servico(s.nome))}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="svc-card__btn"
                   >
-                    Pedir orçamento
-                    <ArrowRight />
+                    Solicitar este serviço <ArrowRight size={17} />
                   </a>
                 </div>
               </article>
             )
           })}
-
-          <aside className="svc-cta-card reveal" data-delay={2}>
-            <h3>Não encontrou o que procurava?</h3>
-            <p>
-              Fale connosco e desenhamos juntos a solução ideal para o seu projecto — da
-              criação à montagem final.
-            </p>
-            <a
-              className="btn btn-whatsapp"
-              href={whatsappLink(wa.geral)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MessageCircle />
-              Falar com a AG
-            </a>
-          </aside>
         </div>
       </div>
     </section>
